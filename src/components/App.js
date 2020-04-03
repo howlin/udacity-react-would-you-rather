@@ -2,6 +2,8 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import LoadingBar from 'react-redux-loading-bar'
+import NavBar from './NavBar'
+import Login from './Login'
 
 class App extends Component {
   componentDidMount() {
@@ -10,8 +12,9 @@ class App extends Component {
   render() {
     return (
       <Fragment>
+        <NavBar />
         <LoadingBar />
-        <h1>Would You Rather?</h1>
+        <Login />
       </Fragment>
     )
   }
