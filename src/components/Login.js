@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { 
   Box, 
   Card,
@@ -8,64 +9,77 @@ import {
   Select,
   FormControl,
   MenuItem,
-  withStyles,
-  InputLabel} from '@material-ui/core'
-import 'typeface-roboto'
+  InputLabel,
+  CircularProgress} from '@material-ui/core'
+import { setAuthUser } from '../actions/authedUser'
 
-const styles = (theme) => ({
-  root: {
-    width: '100%',
-    marginTop: 100
-  },
-  card: {
-    width: 300,
-    padding: 30
-  },
-  formControl: {
-    minWidth: 280
-  }
-})
-
-/* 
-  TODO:
-    - List of users needs to be dynamic
-*/
 
 class Login extends Component {
+  state = {
+    selectedUser: ''
+  }
+  handleChange = (e) => {
+    const selectedUser = e.target.value
+    this.setState(() => ({
+      selectedUser
+    }))
+  }
+  handleSubmit = (e) => {
+    const { dispatch } = this.props
+    dispatch( setAuthUser(this.state.selectedUser) )
+  }
   render() {
-    const { classes } = this.props
+    const { users, loading } = this.props
+    const { selectedUser }  = this.state
+
     return (
       <Box 
-        className={classes.root} 
+        style={{marginTop: 100}}
         display="flex" 
         justifyContent="center">
-        <Card variant="outlined" className={classes.card}>
+        <Card variant="outlined" style={{width: 300, padding: 30}}>
           <CardHeader title="Login"/>
-          <Grid container alignItems="flex-end" justify="flex-end" spacing={2} direction="column">
-            <Grid item>
-              <FormControl variant="outlined" className={classes.formControl}>
-                <InputLabel id="select-user-label">Pick a user</InputLabel>
-                <Select 
-                  labelId="select-user-label" 
-                  label="Pick a user"
-                  value="">
-                    <MenuItem value="None">None</MenuItem>
-                    <MenuItem value="sarahedo">Sarah Edo</MenuItem>
-                    <MenuItem value="tylermcginnis">Tyler McGinnis</MenuItem>
-                    <MenuItem value="johndoe">John Doe</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-            <Grid item>
-              <Button variant="contained" color="primary">
-                Login
-              </Button>
-            </Grid>
-          </Grid>
+          {loading 
+            ? <Grid container alignItems="center" justify="center">
+                <CircularProgress />
+              </Grid>
+            : <Grid container alignItems="flex-end" justify="flex-end" spacing={2} direction="column">
+                <Grid item>
+                  <FormControl variant="outlined" style={{minWidth: 280}}>
+                    <InputLabel id="select-user-label">Pick a user</InputLabel>
+                    <Select 
+                      labelId="select-user-label" 
+                      label="Pick a user"
+                      onChange={this.handleChange}
+                      value={selectedUser}>
+                        {Object.keys(users).map((id) => (
+                          <MenuItem key={id} value={id}>{users[id].name}</MenuItem>
+                        ))}
+                    </Select>
+                  </FormControl>
+                </Grid>
+                <Grid item>
+                  <Button 
+                    variant="contained" 
+                    color="primary"
+                    onClick={this.handleSubmit}>
+                      Login
+                  </Button>
+                </Grid>
+              </Grid>
+          }
         </Card>
       </Box>
     )
   }
 }
 
-export default withStyles(styles)(Login)
+function mapStateToProps({ users, authedUser }){
+  return {
+    users,
+    authedUser,
+    loading: Object.keys(users).length === 0
+  }
+}
+
+export default connect(mapStateToProps)(Login)
