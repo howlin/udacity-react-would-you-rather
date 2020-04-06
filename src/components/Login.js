@@ -10,7 +10,7 @@ import {
   FormControl,
   MenuItem,
   InputLabel,
-  CircularProgress} from '@material-ui/core'
+  CircularProgress } from '@material-ui/core'
 import { setAuthUser } from '../actions/authedUser'
 import { Redirect } from 'react-router-dom'
 
@@ -25,10 +25,16 @@ class Login extends Component {
       selectedUser
     }))
   }
-  handleSubmit = (e) => {
+  handleSubmit = () => {
+    const { selectedUser } = this.state
     const { dispatch } = this.props
-    console.log('___called???')
-    dispatch( setAuthUser(this.state.selectedUser) )
+
+    if (selectedUser === '') {
+      return
+      /* TODO: put in some form validation here*/
+    }
+
+    dispatch( setAuthUser(selectedUser) )
   }
   render() {
     const { users, loading, authedUser } = this.props
