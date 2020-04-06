@@ -12,6 +12,7 @@ import {
   InputLabel,
   CircularProgress} from '@material-ui/core'
 import { setAuthUser } from '../actions/authedUser'
+import { Redirect } from 'react-router-dom'
 
 
 class Login extends Component {
@@ -26,11 +27,16 @@ class Login extends Component {
   }
   handleSubmit = (e) => {
     const { dispatch } = this.props
+    console.log('___called???')
     dispatch( setAuthUser(this.state.selectedUser) )
   }
   render() {
-    const { users, loading } = this.props
+    const { users, loading, authedUser } = this.props
     const { selectedUser }  = this.state
+
+    if (authedUser !== null) {
+      return <Redirect to="/home" />
+    }
 
     return (
       <Box 
