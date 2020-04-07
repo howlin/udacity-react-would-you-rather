@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme) => ({
 const NavBar = (props) => {
   const classes = useStyles()
   const { authedUser, users } =  props
+  const authUserWelcome = users[authedUser] ? `Hello ${users[authedUser].name}` : ''
 
   const handleLogout = () => {
     const { dispatch } = props
@@ -44,7 +45,7 @@ const NavBar = (props) => {
                 <Button color="inherit">New Question</Button>
                 <Button color="inherit">Leader Board</Button>
 
-                <Typography variant="body1" component="span" className={classes.welcome}> {`Hello ${users[authedUser].name}`} </Typography>
+                <Typography variant="body1" component="span" className={classes.welcome}> {authUserWelcome} </Typography>
                 <AccountBox color="inherit" className={classes.accountBox} />
                 <Button color="inherit" onClick={handleLogout}>Log Out</Button>
             </div>
