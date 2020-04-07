@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
-import { Box, Grid, Card , Button, ButtonGroup } from '@material-ui/core'
+import { Grid, Card , Button, ButtonGroup } from '@material-ui/core'
 import QuestionContainer from './QuestionContainer'
 
 const UNANSWERED = "UNANSWERED"
@@ -34,10 +34,6 @@ class Home extends Component {
     }
 
     return (
-      <Box 
-        style={{marginTop: 20, marginBottom: 50}}
-        display="flex" 
-        justifyContent="center">
         <Card variant="outlined" style={{width: 600, padding: 10}}>
           <Grid container justify="center" spacing={2}>
             <Grid item>
@@ -59,7 +55,6 @@ class Home extends Component {
             ))}
           </Grid>
         </Card>
-      </Box>
     )
   }
 }

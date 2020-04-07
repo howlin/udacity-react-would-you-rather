@@ -3,10 +3,12 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { handleInitialData } from '../actions/shared'
 import 'typeface-roboto'
+import { Box } from '@material-ui/core'
 import LoadingBar from 'react-redux-loading-bar'
 import NavBar from './NavBar'
 import Login from './Login'
 import Home from './Home'
+import LeaderBoard from './LeaderBoard'
 
 class App extends Component {
   componentDidMount() {
@@ -18,8 +20,14 @@ class App extends Component {
         <Fragment>
           <NavBar />
           <LoadingBar />
-          <Route path='/' exact component={Login} />
-          <Route path='/home' exact component={Home} />
+          <Box 
+            style={{marginTop: 20, marginBottom: 50}}
+            display="flex" 
+            justifyContent="center">
+              <Route path='/' exact component={Login} />
+              <Route path='/home' exact component={Home} />
+              <Route path='/leaderboard' exact component={LeaderBoard} />
+          </Box>
         </Fragment>
       </Router>
     )
