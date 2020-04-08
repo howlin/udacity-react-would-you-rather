@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Redirect } from 'react-router-dom'
 import { Grid, Card , Button, ButtonGroup } from '@material-ui/core'
-import QuestionContainer from './QuestionContainer'
+import Question from './question-types/Question'
+import { QTYPE } from './question-types/Question'
+
 
 const UNANSWERED = "UNANSWERED"
 const ANSWERED = "ANSWERED"
@@ -50,7 +52,7 @@ class Home extends Component {
             </Grid>
             {questionsListIds.map(qid => (
               <Grid key={qid} item>
-                <QuestionContainer qid={qid} />
+                <Question qid={qid} type={QTYPE.summary} />
               </Grid>
             ))}
           </Grid>
