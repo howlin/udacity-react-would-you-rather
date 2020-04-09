@@ -9,6 +9,7 @@ import NavBar from './NavBar'
 import Login from './Login'
 import Home from './Home'
 import LeaderBoard from './LeaderBoard'
+import QuestionPage from './QuestionPage'
 
 class App extends Component {
   componentDidMount() {
@@ -26,6 +27,7 @@ class App extends Component {
             justifyContent="center">
               <Route path='/' exact component={Login} />
               <Route path='/home' exact component={Home} />
+              <Route path='/question/:qid' component={QuestionPage} />
               <Route path='/leaderboard' exact component={LeaderBoard} />
           </Box>
         </Fragment>

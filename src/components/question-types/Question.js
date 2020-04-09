@@ -13,6 +13,7 @@ import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import Summary from './Summary'
 import Ask from './Ask'
+import Result from './Result'
 
 export const QTYPE = {
   summary: 'SUMMARY',
@@ -65,10 +66,12 @@ const Question = ( props ) => {
             {function(){
               switch(type) {
                 case QTYPE.ask:
-                  return <Ask qid={qid}/>
+                  return <Ask qid={qid} />
+                case QTYPE.result:
+                  return <Result qid={qid} />
                 case QTYPE.summary:
                 default:
-                  return <Summary qid={qid}/>
+                  return <Summary qid={qid} />
               }
             }()}
             
