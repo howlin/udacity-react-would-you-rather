@@ -36,8 +36,10 @@ import {
 const Result = (props) => {
   const { question, authedUser } = props
   const classes = useStyles()
-  const votesOne = question.optionOne.votes.length
-  const votesTwo = question.optionTwo.votes.length
+  const countVoteOne = question.optionOne.votes.length
+  const countVoteTwo = question.optionTwo.votes.length
+  const percVoteOne = Math.round((countVoteOne / (countVoteOne + countVoteTwo)) * 100)
+  const percVoteTwo = Math.round((countVoteTwo / (countVoteOne + countVoteTwo)) * 100)
   const authedUsersVote = question.optionOne.votes.includes(authedUser) ? 1 : 2
 
   return (
@@ -55,10 +57,11 @@ const Result = (props) => {
               className={classes.margin}
               variant="determinate"
               color="secondary"
-              value={(votesOne / (votesOne + votesTwo)) * 100}
+              value={percVoteOne}
             />
+            <Typography variant="body1">{percVoteOne}%</Typography>
             <Typography variant="body1">
-              {votesOne} out of {votesOne + votesTwo} votes
+              {countVoteOne} out of {countVoteOne + countVoteTwo} votes
             </Typography>
         </Grid>
         <Grid item className={classes.question} >
@@ -73,10 +76,11 @@ const Result = (props) => {
               className={classes.margin}
               variant="determinate"
               color="secondary"
-              value={(votesTwo / (votesOne + votesTwo)) * 100}
+              value={percVoteTwo}
             />
+            <Typography variant="body1">{percVoteTwo}%</Typography>
             <Typography variant="body1">
-              {votesTwo} out of {votesOne + votesTwo} votes
+              {countVoteTwo} out of {countVoteOne + countVoteTwo} votes
             </Typography>
         </Grid>
       </Box>
