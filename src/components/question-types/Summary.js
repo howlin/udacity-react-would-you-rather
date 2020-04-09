@@ -27,7 +27,7 @@ const Summary = ( props ) => {
         <Button 
           variant="contained" 
           color="secondary"
-          onClick={(() => props.history.push(`/question/${qid}`))}>View Poll</Button>
+          onClick={(() => props.history.push(`/questions/${qid}`))}>View Poll</Button>
       </Grid>
     </Grid>
   )

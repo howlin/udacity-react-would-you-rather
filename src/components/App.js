@@ -27,7 +27,7 @@ class App extends Component {
             justifyContent="center">
               <Route path='/' exact component={Login} />
               <Route path='/home' exact component={Home} />
-              <Route path='/question/:qid' component={QuestionPage} />
+              <Route path='/questions/:qid' component={QuestionPage} />
               <Route path='/leaderboard' exact component={LeaderBoard} />
           </Box>
         </Fragment>
