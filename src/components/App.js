@@ -10,6 +10,7 @@ import Login from './Login'
 import Home from './Home'
 import LeaderBoard from './LeaderBoard'
 import QuestionPage from './QuestionPage'
+import Add from './Add'
 
 class App extends Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ class App extends Component {
               <Route path='/' exact component={Login} />
               <Route path='/home' exact component={Home} />
               <Route path='/questions/:qid' component={QuestionPage} />
+              <Route path='/add' exact component={Add} />
               <Route path='/leaderboard' exact component={LeaderBoard} />
           </Box>
         </Fragment>
