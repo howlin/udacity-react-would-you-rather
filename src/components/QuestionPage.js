@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { CircularProgress } from '@material-ui/core'
 import Question from './question-types/Question'
 import { QTYPE } from './question-types/Question'
@@ -15,6 +16,12 @@ const QuestionDetails = (props) => {
       ...q.optionTwo.votes
     ].includes(authedUser)
     type = userHasAnswered ? QTYPE.result : QTYPE.ask
+  }
+
+  if (authedUser === null) {
+    return (
+      <Redirect to="/" />
+    )
   }
   
   return (

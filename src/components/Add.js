@@ -41,6 +41,13 @@ class Add extends Component {
   }
   render() {
     const { option1, option2, toHome } = this.state
+    const { authedUser } = this.props
+
+    if (authedUser === null) {
+      return (
+        <Redirect to="/" />
+      )
+    }
 
     if (toHome === true){
       return <Redirect to='/home' />
@@ -107,7 +114,12 @@ class Add extends Component {
       </Box>  
     )
   }
-
 }
 
-export default connect()(Add)
+function mapStateToProps({ authedUser }){
+  return { 
+    authedUser
+  }
+}
+
+export default connect(mapStateToProps)(Add)

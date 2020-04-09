@@ -12,10 +12,18 @@ import LeaderBoard from './LeaderBoard'
 import QuestionPage from './QuestionPage'
 import Add from './Add'
 
+/*
+  TODO: implement the react-router auth workflow instead 
+        of custom redirect code on each top level component 
+        https://reacttraining.com/react-router/web/example/auth-workflow
+  
+*/
+
 class App extends Component {
   componentDidMount() {
     this.props.dispatch(handleInitialData())
   }
+
   render() {
     return (
       <Router>
@@ -38,4 +46,10 @@ class App extends Component {
   }
 }
 
-export default connect()(App)
+function mapStateToProps({ authedUser }){
+  return {
+    authedUser
+  }
+}
+
+export default connect(mapStateToProps)(App)

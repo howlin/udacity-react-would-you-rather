@@ -1,10 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { Redirect } from 'react-router-dom'
 import { Grid, Card } from '@material-ui/core'
 import User from './User'
 
 const LeaderBoard = ( props ) => {
-  const { users } = props
+  const { users, authedUser } = props
 
   const sortedUsers = Object.keys(users)
     .map(uid => (
@@ -15,6 +16,13 @@ const LeaderBoard = ( props ) => {
       const bScore = Object.keys(b.answers).length + Object.keys(b.questions).length
       return bScore - aScore
     })
+
+
+  if (authedUser === null) {
+    return (
+      <Redirect to="/" />
+    )
+  }
 
   return (
     <Card variant="outlined" style={{width: 600, padding: 10}}>
@@ -31,9 +39,10 @@ const LeaderBoard = ( props ) => {
   )
 }
 
-function mapStateToProps({ users }){
+function mapStateToProps({ users, authedUser }){
   return { 
-    users
+    users,
+    authedUser
   }
 }
 
