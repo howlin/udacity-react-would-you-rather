@@ -11,22 +11,23 @@ const ANSWERED = "ANSWERED"
 
 class Home extends Component {
   state = {
-    showAnswered: false
+    userHasAnswered: false
   }
   handleButtonClick(e) {
     const whichQuestions = e.currentTarget.name
     this.setState(() => ({
-      showAnswered: whichQuestions === ANSWERED
+      userHasAnswered: whichQuestions === ANSWERED
     }))
   }
   render(){
     const { authedUser, questions } = this.props
+    const { userHasAnswered } = this.state
     const questionsListIds = Object.keys(questions).filter(qid => {
       const didVote = [
         ...questions[qid].optionOne.votes,
         ...questions[qid].optionTwo.votes
       ].includes(authedUser)
-      return this.state.showAnswered ? didVote : !didVote
+      return this.state.userHasAnswered ? didVote : !didVote
     })
 
     if (authedUser === null) {
@@ -42,11 +43,11 @@ class Home extends Component {
               <ButtonGroup>
                 <Button
                   name={UNANSWERED}
-                  variant={this.state.showAnswered === false ? 'contained' : 'outlined'}
+                  variant={userHasAnswered === false ? 'contained' : 'outlined'}
                   onClick={this.handleButtonClick.bind(this)}>Unanswered Questions</Button>
                 <Button 
                   name={ANSWERED}
-                  variant={this.state.showAnswered === true ? 'contained' : 'outlined'}
+                  variant={userHasAnswered === true ? 'contained' : 'outlined'}
                   onClick={this.handleButtonClick.bind(this)}>Answered Questions</Button>
               </ButtonGroup>
             </Grid>
