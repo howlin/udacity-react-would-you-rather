@@ -5,7 +5,8 @@ import {
   Box,
   Typography,
   LinearProgress,
-  Divider } from '@material-ui/core'
+  Divider,
+  Chip } from '@material-ui/core'
   import { lighten, makeStyles, withStyles } from '@material-ui/core/styles';
 
   const BorderLinearProgress = withStyles({
@@ -33,10 +34,11 @@ import {
   }))
 
 const Result = (props) => {
-  const { question } = props
+  const { question, authedUser } = props
   const classes = useStyles()
   const votesOne = question.optionOne.votes.length
   const votesTwo = question.optionTwo.votes.length
+  const authedUsersVote = question.optionOne.votes.includes(authedUser) ? 1 : 2
 
   return (
     <Grid containerdirection="column">
@@ -45,6 +47,9 @@ const Result = (props) => {
           <Typography variant="h6">Result:</Typography>
         </Grid>
         <Grid item className={classes.question} align="center">
+            {authedUsersVote === 1 && 
+              <Chip variant="outlined" size="small" label="Your Answer" />}
+
             <Typography variant="body1">Would you rather {question.optionOne.text}</Typography>
             <BorderLinearProgress
               className={classes.margin}
@@ -60,6 +65,9 @@ const Result = (props) => {
           <Divider />
         </Grid>
         <Grid item className={classes.question} align="center">
+            {authedUsersVote === 2 && 
+                  <Chip variant="outlined" size="small" label="Your Answer" />}
+                  
             <Typography variant="body1">Would you rather {question.optionTwo.text}</Typography>
             <BorderLinearProgress
               className={classes.margin}
@@ -76,9 +84,10 @@ const Result = (props) => {
   )
 }
 
-function mapStateToProps({ questions }, { qid }){
+function mapStateToProps({ questions, authedUser }, { qid }){
   return {
-    question: questions[qid]
+    question: questions[qid],
+    authedUser
   }
 }
 
