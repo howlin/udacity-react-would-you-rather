@@ -11,6 +11,11 @@ const QuestionDetails = (props) => {
   let type = QTYPE.ask
 
   if( !loading ){
+
+    if( q === undefined) {
+      return <Redirect to='/404' />
+    }
+
     const userHasAnswered = [
       ...q.optionOne.votes,
       ...q.optionTwo.votes
@@ -20,7 +25,7 @@ const QuestionDetails = (props) => {
 
   if (authedUser === null) {
     return (
-      <Redirect to="/" />
+      <Redirect to={`/?returnTo=questions/${qid}`} />
     )
   }
   

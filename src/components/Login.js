@@ -38,10 +38,15 @@ class Login extends Component {
   }
   render() {
     const { users, loading, authedUser } = this.props
+    const params = this.props.location.search
     const { selectedUser }  = this.state
+  
 
     if (authedUser !== null) {
-      return <Redirect to="/home" />
+      // checks if a returnTo exists in the URL.  If it does, go to there.  If not go /home. 
+      const paramBits = params.substr(1).split("=")
+      const redirectTo = paramBits[0] === 'returnTo' ? `/${paramBits[1]}` : '/home'
+      return <Redirect to={redirectTo} />
     }
 
     return (

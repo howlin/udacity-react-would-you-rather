@@ -11,6 +11,7 @@ import Home from './Home'
 import LeaderBoard from './LeaderBoard'
 import QuestionPage from './QuestionPage'
 import Add from './Add'
+import FourZeroFour from './FourZeroFour'
 
 /*
   TODO: implement the react-router auth workflow instead 
@@ -39,6 +40,7 @@ class App extends Component {
               <Route path='/questions/:qid' component={QuestionPage} />
               <Route path='/add' exact component={Add} />
               <Route path='/leaderboard' exact component={LeaderBoard} />
+              <Route path='/404' exact component={FourZeroFour} />
           </Box>
         </Fragment>
       </Router>
