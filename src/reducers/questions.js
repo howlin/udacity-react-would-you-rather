@@ -10,7 +10,7 @@ export default function questions ( state = {}, action ) {
         ...state,
         ...action.questions
       };
-    case ANSWER_QUESTION:
+    case ANSWER_QUESTION: {
       const answeredQuestion = state[action.qid];
       const { authedUser, qid, answer } = action;
       answeredQuestion[answer].votes.push(authedUser);
@@ -19,12 +19,14 @@ export default function questions ( state = {}, action ) {
         ...state,
         [qid]: answeredQuestion
       };
-    case ADD_QUESTION:
+    }
+    case ADD_QUESTION: {
       const { question } = action;
       return {
         ...state,
         [question.id]: question
       };
+    }
     default:
       return state;
   }
