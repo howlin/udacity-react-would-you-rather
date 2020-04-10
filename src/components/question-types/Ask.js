@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { 
   Grid, 
   Typography, 
@@ -60,11 +61,16 @@ class Ask extends Component {
   }
 }
 
+Ask.propTypes = {
+  qid: PropTypes.string.isRequired
+}
+
 function mapStateToProps({ authedUser, questions }, qid){
   return {
     authedUser,
     questions
   }
 }
+
 
 export default connect(mapStateToProps)(Ask)

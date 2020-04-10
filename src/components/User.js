@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { 
   Box, Grid, Card, 
   AppBar, Toolbar, Typography, Avatar, Divider,
@@ -97,6 +98,10 @@ const User = ( props ) => {
     </Box>
         
   )
+}
+
+User.propTypes = {
+  uid: PropTypes.string.isRequired
 }
 
 function mapStateToProps({ users,  questions}){

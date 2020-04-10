@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { 
   Grid,
   Box,
@@ -7,7 +8,7 @@ import {
   LinearProgress,
   Divider,
   Chip } from '@material-ui/core'
-  import { lighten, makeStyles, withStyles } from '@material-ui/core/styles';
+import { lighten, makeStyles, withStyles } from '@material-ui/core/styles';
 
   const BorderLinearProgress = withStyles({
     root: {
@@ -86,6 +87,10 @@ const Result = (props) => {
       </Box>
     </Grid>
   )
+}
+
+Result.propTypes = {
+  qid: PropTypes.string.isRequired
 }
 
 function mapStateToProps({ questions, authedUser }, { qid }){

@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 import { Typography, Button, Grid } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { withRouter } from 'react-router-dom'
@@ -31,6 +32,10 @@ const Summary = ( props ) => {
       </Grid>
     </Grid>
   )
+}
+
+Summary.propTypes = {
+  qid: PropTypes.string.isRequired
 }
 
 function mapStateToProps({ questions }){
